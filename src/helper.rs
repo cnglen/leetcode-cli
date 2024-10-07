@@ -198,8 +198,9 @@ mod file {
         let conf = crate::config::Config::locate()?;
         let mut path = format!("{}/{}.tests.dat", conf.storage.code()?, conf.code.pick);
 
-        path = path.replace("${fid}", &problem.fid.to_string());
-        path = path.replace("${slug}", &problem.slug.to_string());
+        path = path.replace("${fid}", &format!("p{:04}", problem.fid));
+        path = path.replace("${slug}", &problem.slug.to_string().replace("-", "_"));
+
         Ok(path)
     }
 
@@ -218,8 +219,8 @@ mod file {
             suffix(&lang)?,
         );
 
-        path = path.replace("${fid}", &problem.fid.to_string());
-        path = path.replace("${slug}", &problem.slug.to_string());
+        path = path.replace("${fid}", &format!("p{:04}", problem.fid));
+        path = path.replace("${slug}", &problem.slug.to_string().replace("-", "_"));
 
         Ok(path)
     }
